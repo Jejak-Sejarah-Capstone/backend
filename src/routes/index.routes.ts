@@ -1,12 +1,12 @@
 import { Express } from "express";
 import { IndexController } from "../controllers/index.controller";
+import { authRoutes } from "./auth.routes";
 
 export const router = (app: Express): void => {
     // Root route
     app.route("/").get(IndexController.index);
 
-    // // Routes Tambahan untuk resource lain
-    // userRoutes(app);
+    authRoutes(app);
 
     // Fallback route
     app.use(IndexController.fallback);
