@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login with Firebase</title>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBGAIdToDM9Bdof8cuEnFWKU_RMNthSdwQ",
+            authDomain: "jejak-sejarah-442803.firebaseapp.com",
+            projectId: "jejak-sejarah-442803",
+            storageBucket: "jejak-sejarah-442803.appspot.com",
+            messagingSenderId: "1031581486551",
+            appId: "1:1031581486551:web:828bab6ef8a2ab12facf92",
+            measurementId: "G-55T6TTH0NL"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app); // Inisialisasi Auth
+
+        // Menangani pengiriman form
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault(); // Mencegah reload halaman
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                // Mengautentikasi pengguna
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                // Mendapatkan ID token
+                const idToken = await userCredential.user.getIdToken();
+                document.getElementById('result').innerText = `ID Token: ${idToken}`;
+                console.log("ID Token:", idToken);
+            } catch (error) {
+                console.error("Error signing in:", error);
+                document.getElementById('result').innerText = `Error: ${error.message}`;
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1>Login</h1>
+    <form id="login-form">
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+    <div id="result"></div>
+</body>
+</html>

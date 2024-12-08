@@ -4,15 +4,7 @@ import { firebaseAdmin } from '../config/firebase';
 export const AuthQuery = {
   getUserByUid: async (uid: string) => {
     const userDoc = await db.collection('users').doc(uid).get();
-    if (!userDoc.exists) {
-      throw new Error('User not found');
-    }
     return userDoc.data();  
-  },
-
-  createCustomToken: async (uid: string) => {
-    const token = await firebaseAdmin.auth().createCustomToken(uid);
-    return token;  
   },
 
   createUser: async (data: { email: string, name: string, password: string }) => {

@@ -1,4 +1,5 @@
 import * as admin from 'firebase-admin';
+import { getAuth } from 'firebase-admin/auth';
 const serviceAccount = require('../../jejak-sejarah-442803-serviceAccount.json');
 
 admin.initializeApp({
@@ -7,5 +8,6 @@ admin.initializeApp({
 
 const db = admin.firestore();
 const firebaseAdmin = admin;
+const auth = getAuth();
 
-export { db, firebaseAdmin };
+export { db, firebaseAdmin, auth };
