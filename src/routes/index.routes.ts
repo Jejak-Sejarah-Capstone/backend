@@ -3,6 +3,7 @@ import { IndexController } from "../controllers/index.controller";
 import { authRoutes } from "./auth.routes";
 import errorHandler from "../handler/errorHandler";
 import { leaderboardRoutes } from "./leaderboard.routes";
+import { predictRoutes } from "./predict.routes";
 
 export const router = (app: Express): void => {
     // Root route
@@ -10,6 +11,7 @@ export const router = (app: Express): void => {
 
     authRoutes(app);
     leaderboardRoutes(app);
+    predictRoutes(app);
 
     app.use(errorHandler);
     // Fallback route

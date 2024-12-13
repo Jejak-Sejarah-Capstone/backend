@@ -3,7 +3,7 @@ import { router } from "./routes/index.routes";
 import cors from "cors";
 
 const app: Express = express();
-const PORT: number = 8000;
+const PORT: number = 3000;
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
@@ -13,7 +13,7 @@ router(app);
 
 function main(): void {
 	try {
-		app.listen(PORT, (): void => {
+		app.listen(PORT,"0.0.0.0", (): void => {
 			console.log(`⚡️ [SERVER]: Server running at localhost:${PORT}`);
 		});
 	} catch (err: any) {
