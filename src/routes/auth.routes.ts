@@ -5,11 +5,5 @@ import { authenticateToken } from "../middleware/authentication";
 
 export const authRoutes = (app: Express): void => {
     app.route("/signup").post(catchAsync(AuthController.signup));
-    app.route("/user").get(catchAsync(AuthController.getUserByToken));
-    app.route("/protected").get(authenticateToken, (req: any, res) => {
-        res.status(200).json({
-            message: "This is a protected route",
-            user: req.user, 
-        });
-    });
+    app.route("/user").get(authenticateToken, catchAsync(AuthController.getUserByToken));
 };

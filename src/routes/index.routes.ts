@@ -2,12 +2,14 @@ import { Express } from "express";
 import { IndexController } from "../controllers/index.controller";
 import { authRoutes } from "./auth.routes";
 import errorHandler from "../handler/errorHandler";
+import { leaderboardRoutes } from "./leaderboard.routes";
 
 export const router = (app: Express): void => {
     // Root route
     app.route("/").get(IndexController.index);
 
     authRoutes(app);
+    leaderboardRoutes(app);
 
     app.use(errorHandler);
     // Fallback route
